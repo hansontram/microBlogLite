@@ -16,8 +16,8 @@ class AuthService
     // You can use this function to get the login data of the logged-in
     // user (if any). It returns either an object including the username
     // and token, or an empty object if the visitor is not logged in.
-    getLoginData()
-    {
+    getLoginData(){
+        
         const loginJSON = window.localStorage.getItem("login-data")
         return JSON.parse(loginJSON) || {}
     }
@@ -27,7 +27,7 @@ class AuthService
     // logged in. It returns either `true` or `false`.
     isLoggedIn()
     {
-        const loginData = getLoginData()
+        const loginData = this.getLoginData()
         return Boolean(loginData.token)
     }
 
@@ -50,12 +50,12 @@ class AuthService
             body: JSON.stringify(loginData),
         }
 
-        return fetch(apiBaseURL + "/auth/login", options)
+        return fetch(this.apiBaseURL + "/auth/login", options)
             .then(response => response.json())
             .then(loginData =>
             {
                 window.localStorage.setItem("login-data", JSON.stringify(loginData))
-                window.location.assign("/posts")  // redirect
+                window.location.assign("/posts/posts.html")  // redirect
 
                 return loginData
             })
@@ -92,7 +92,7 @@ class AuthService
                 // error with the fetch request above.
 
                 window.localStorage.removeItem("login-data")  // remove login data from LocalStorage
-                window.location.assign("/")  // redirect back to landing page
+                window.location.assign("../index.html")  // redirect back to landing page
             })
     }
 }
