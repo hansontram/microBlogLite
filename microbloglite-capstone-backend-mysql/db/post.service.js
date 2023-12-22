@@ -18,11 +18,9 @@ class PostService {
 
         posts = [...posts]
 
-        posts.forEach(async (post) => {
-
+        for(let post of posts) {
             post.likes = await likeService.getByPostId(post._id)
-            
-        });
+        }
 
         return posts
     }
@@ -35,17 +33,16 @@ class PostService {
                     , username
                     , createdAt
                 FROM posts
+                WHERE username = ?
                 LIMIT ? OFFSET ?;
             `
         let posts = await query(sql, [username, limit, skip])
 
         posts = [...posts]
 
-        posts.forEach(async (post) => {
-
+        for(let post of posts) {
             post.likes = await likeService.getByPostId(post._id)
-            
-        });
+        }
 
         return posts
     }

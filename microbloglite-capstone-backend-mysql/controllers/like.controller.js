@@ -9,9 +9,19 @@ class LikeController {
             const likeData = req.body;
             likeData.username = req.user.username
 
-            let newLike = await likeService.addLike(likeData)
+            let existingLike = await likeService.findExisting(likeData)
 
-            res.status(201).json(newLike)
+            if(existingLike){
+                res.status(400).json({
+                    message: "You are only allowed 1 like per post",
+                    status: res.statusCode
+                })
+            }
+            else {
+                let newLike = await likeService.addLike(likeData)
+
+                res.status(201).json(newLike)
+            }
             
         } catch (error) {
             console.log("failed to create like: " + error)

@@ -6,10 +6,13 @@ class PostController{
 
         let limit = parseInt(req.query.limit) || 100
         let skip =  parseInt(req.query.offset) || 0
+        let username = req.query.username || undefined
 
         try {
             
-            let allPosts = await postService.getPosts(limit, skip)
+            let allPosts = (username) 
+                            ? await postService.getPostsByUser(username, limit, skip) 
+                            : await postService.getPosts(limit, skip)
             
             // if(!req.query.username) allPosts = await postService.getPosts(limit, skip)
             // else allPosts = await postService.getPostsByUser(req.query.username, limit, skip)

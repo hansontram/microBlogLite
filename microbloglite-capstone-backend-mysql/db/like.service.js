@@ -12,7 +12,27 @@ class LikeService {
             FROM likes
             WHERE postId = ?;
         `
-        return await query(sql, [postId])
+        try {            
+            const likes = await query(sql, [postId])
+            return likes
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async findExisting(like){
+        const sql = `
+            SELECT _id
+                , username
+                , postId
+                , createdAt
+            FROM likes
+            WHERE postId = ?
+                AND username = ?;
+        `
+        const response = await query(sql, [like.postId, like.username])
+
+        return response.length > 0 ? response[0] : undefined
     }
 
     async getById(id){
