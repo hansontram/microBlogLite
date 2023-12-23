@@ -2,6 +2,9 @@
 
 "use strict";
 
+// TODO: Get logout functionality to work
+
+
 // let authService
 // let logout 
 
