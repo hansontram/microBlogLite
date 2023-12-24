@@ -2,24 +2,19 @@
 
 "use strict";
 
-// TODO: Get logout functionality to work
-
 
 // let authService
-// let logout 
+// let logout
 
-// document.addEventListener("DOMContentLoaded", () => {
-//      authService = new AuthService()
+document.addEventListener("DOMContentLoaded", () => {
+  authService = new AuthService();
 
-//     // if(authService.isLoggedIn()) {
-//     //     window.location.replace("/posts")
-//     // }
-
-//     logout = document.querySelector("#logout-link");
-//     logout.addEventListener("click", logout)
-
-// })
-
-// function logUserOut (){
-//     authService.login();
-// }
+  const logoutLink = document.querySelector("#logout-link");
+  logoutLink.addEventListener("click", () => {
+    authService.logout();
+  });
+  // moved here from posts.html to avoid console error
+  if (authService.isLoggedIn() === false) {
+    window.location.replace("/");
+  }
+});
