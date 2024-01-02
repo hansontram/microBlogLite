@@ -6,11 +6,11 @@
     <title>Document</title>
 </head>
 <link rel="stylesheet" href="register.css">
-<script src="register.js"></script>
-<script src="/services/services-base.js"></script>
+<script src="/register/register.js"></script>
+<script src="/services/auth-service.js"></script>
 <body>
     <div>
-    <form action="register.html" method="post">
+    <form id="register" action="register.html" method="post">
         <div class="container">        
             <h1>Registration</h1>
             <p>Fill up the form with the correct values.</p>
@@ -23,7 +23,7 @@
         <label for="password">Password:</label>
         <input type="text" id="password" name="password" required>
 
-        <button type="submit">Register</button>
+        <button id="submit" type="submit">Register</button>
 
         <a href="#">Already have an account? Login</a>
         </div>

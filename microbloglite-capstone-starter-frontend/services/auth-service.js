@@ -95,4 +95,35 @@ class AuthService
                 window.location.assign("../index.html")  // redirect back to landing page
             })
     }
+    async register(formData){
+        console.log(formData)
+        const options = {
+
+            method: "POST",
+            headers: {
+               
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+
+        }
+        console.log(options)
+        return fetch(this.apiBaseURL + "/api/users", options)
+        // .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Registration failed');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Handle successful registration response
+            console.log('User registered successfully:', data);
+        })
+        .catch(error => {
+            console.error('Registration error:', error.message);
+        });
+
+    }
+    
 }

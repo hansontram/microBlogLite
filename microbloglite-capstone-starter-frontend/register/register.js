@@ -1,34 +1,26 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('registrationForm');
+let authService
+let registerForm
+ 
+document.addEventListener("DOMContentLoaded",()=>{
 
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
 
-        const formData = {
-            username: document.getElementById('username').value.trim(),
-            fullname: document.getElementById('fullname').value.trim(),
-            password: document.getElementById('password').value.trim(),
-        };
+    authService= new AuthService();
+    registerForm =  document.querySelector("#register")
+    console.log(registerForm)
+    registerForm.addEventListener("submit", register)
+})
+function register (event){
 
-        fetch('API_URL/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Registration failed');
-            }
-            return response.json();
-        })
-        .then(data => {
-            // Handle successful registration response
-            console.log('User registered successfully:', data);
-        })
-        .catch(error => {
-            console.error('Registration error:', error.message);
-        });
-    });
-});
+    event.preventDefault()
+    const formData = {
+        username : registerForm.username.value.trim(),
+        fullname: registerForm.fullname.value.trim(),
+        password: registerForm.password.value.trim()
+    };
+    console.log (formData.username)
+registerForm.submit.disabled = true
+authService.register(formData)
+}
+       
+
+        
