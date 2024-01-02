@@ -47,7 +47,7 @@ class AuthService {
       .then((loginData) => {
         window.localStorage.setItem("login-data", JSON.stringify(loginData));
         window.location.assign(
-          "../microbloglite-capstone-starter-frontend/posts/posts.html"
+          "/posts/posts.html"
         ); // redirect
 
         return loginData;
