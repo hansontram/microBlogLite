@@ -46,9 +46,7 @@ class AuthService {
       .then((response) => response.json())
       .then((loginData) => {
         window.localStorage.setItem("login-data", JSON.stringify(loginData));
-        window.location.assign(
-          "/posts/posts.html"
-        ); // redirect
+        window.location.assign("/posts/posts.html"); // redirect
 
         return loginData;
       });
@@ -73,7 +71,6 @@ class AuthService {
       },
     };
 
-
     fetch(this.apiBaseURL + "/auth/logout", options)
       .then((response) => response.json())
       .then((data) => console.log(data))
@@ -81,7 +78,6 @@ class AuthService {
         // We're using `finally()` so that we will continue with the
         // browser side of logging out (below) even if there is an
         // error with the fetch request above.
-
 
         window.localStorage.removeItem("login-data"); // remove login data from LocalStorage
         window.location.assign("/"); // redirect back to landing page
