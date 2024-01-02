@@ -8,14 +8,9 @@ let loginForm;
 document.addEventListener("DOMContentLoaded", () => {
   authService = new AuthService();
 
-  // ** Not needed for now **
-//   if (authService.isLoggedIn()) {
-//     window.location.replace("/posts/posts.html");
-//   }
-
 // TODO: error in console says loginForm = null but login works
   loginForm = document.querySelector("#login");
-  console.log(loginForm)
+  
   loginForm.addEventListener("submit", login);
 
 });
