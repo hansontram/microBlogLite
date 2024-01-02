@@ -49,6 +49,7 @@ function displayPost (post, detailsContainer){
 
   addUsername(post, detailsContainer);
   addDescription(post, detailsContainer);
+  addLikeButton(post,detailsContainer);
 }
 
 function addUsername(posts, detailsContainer){
@@ -64,3 +65,14 @@ function addDescription(posts, detailsContainer){
   description.innerText = `Description: ${posts.text}`;
   detailsContainer.appendChild(description)
 } 
+function addLikeButton(posts,detailsContainer){
+  const likeButton = document.createElement("button");
+  likeButton.classList.add("like")
+  likeButton.innerText = `Likes`;
+  detailsContainer.appendChild(likeButton)
+
+  const displayLikes = document.createElement("span");
+  displayLikes.classList.add("like")
+  displayLikes.innerText = `${106}`;
+  detailsContainer.appendChild(displayLikes)
+}
