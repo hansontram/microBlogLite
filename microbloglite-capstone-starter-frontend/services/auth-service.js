@@ -55,7 +55,7 @@ class AuthService
             .then(loginData =>
             {
                 window.localStorage.setItem("login-data", JSON.stringify(loginData))
-                window.location.assign("/posts/posts.html")  // redirect
+                window.location.assign("../microbloglite-capstone-starter-frontend/posts/posts.html")  // redirect
 
                 return loginData
             })
@@ -68,7 +68,7 @@ class AuthService
     // `fetch()` requests you may need to write.
     async logout()
     {
-        const loginData = getLoginData()
+        const loginData = this.getLoginData()
 
         // GET /auth/logout
         const options = {
@@ -82,7 +82,7 @@ class AuthService
             },
         }
 
-        fetch(apiBaseURL + "/auth/logout", options)
+        fetch(this.apiBaseURL + "/auth/logout", options)
             .then(response => response.json())
             .then(data => console.log(data))
             .finally(() =>
@@ -92,7 +92,7 @@ class AuthService
                 // error with the fetch request above.
 
                 window.localStorage.removeItem("login-data")  // remove login data from LocalStorage
-                window.location.assign("../index.html")  // redirect back to landing page
+                window.location.assign("/")  // redirect back to landing page
             })
     }
 }
