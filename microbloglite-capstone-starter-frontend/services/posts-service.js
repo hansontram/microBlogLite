@@ -76,4 +76,33 @@ class PostService extends ServicesBase {
       throw error; // Re-throw the error to be caught by the calling code
     }
   }
+
+  async addPostLike(postData, authToken) {
+    try {
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authToken}`,
+        },
+        body: JSON.stringify(postData),
+      };
+
+      const response = await fetch(this.apiBaseUrl + "/api/likes", options);
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const responseData = await response.json();
+
+      // Do something with the responseData if needed
+      console.log("Post response data:", responseData);
+
+      return responseData;
+    } catch (error) {
+      console.error("Error during POST request:", error);
+      throw error; // Re-throw the error to be caught by the calling code
+    }
+  }
 }
