@@ -47,7 +47,7 @@ class AuthService {
       .then((loginData) => {
         window.localStorage.setItem("login-data", JSON.stringify(loginData));
         window.location.assign(
-          "/posts/posts.html"
+          "git/posts/posts.html"
         ); // redirect
 
         return loginData;
