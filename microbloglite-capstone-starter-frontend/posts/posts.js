@@ -33,19 +33,27 @@ function loadAllPosts(authService, postService) {
 function displayPostDetails(posts) {
   const detailsContainer = document.getElementById("allPostsContainer");
 
-  // TODO: add bootstrap class later
   detailsContainer.classList.add("postContainer");
   detailsContainer.innerHTML = "";
 
   posts.forEach((post) => {
     displayPost(post, detailsContainer);
   });
+  displayGreeting(posts);
 }
-
+function displayGreeting(post) {
+  const greetingContainer = document.getElementById("greetingContainer");
+  const greeting = document.createElement("h4");
+  greeting.classList.add("greeting");
+  // Displays the last user who posted
+  greeting.innerText = `Welcome back, ${post[0].username}!`;
+  greetingContainer.appendChild(greeting);
+}
 function displayPost(post, detailsContainer) {
-  // Create a div for each park
+  // Create a div for each post
   const postContainer = document.createElement("div");
   postContainer.classList.add("postContainer");
+  postContainer.classList.add("border", "border-primary");
 
   detailsContainer.appendChild(postContainer);
 
@@ -57,21 +65,21 @@ function displayPost(post, detailsContainer) {
 function addUsername(posts, detailsContainer) {
   const username = document.createElement("h4");
   username.classList.add("userName");
-  username.innerText = `Username: ${posts.username}`;
+  username.innerText = `@${posts.username}`;
   detailsContainer.appendChild(username);
 }
 
 function addDescription(posts, detailsContainer) {
   const description = document.createElement("h5");
   description.classList.add("description");
-  description.innerText = `Description: ${posts.text}`;
+  description.innerText = `${posts.text}`;
   detailsContainer.appendChild(description);
 }
 function addLikeButton(posts, detailsContainer) {
   const likeButton = document.createElement("button");
   likeButton.setAttribute("id", posts._id);
   likeButton.classList.add("like");
-  likeButton.innerText = `Likes`;
+  likeButton.innerText = `❤️`;
 
   likeButton.addEventListener("click", () => {
     console.log("Button " + posts._id + " Clicked");
