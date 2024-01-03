@@ -2,7 +2,7 @@
 
 "use strict";
 
-let postService
+let postService;
 
 document.addEventListener("DOMContentLoaded", () => {
   authService = new AuthService();
@@ -19,28 +19,30 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.replace("/");
   }
 });
-function loadAllPosts(authService, postService){
-  postService.getAllPosts(authService)
-  .then(posts => {displayPostDetails(posts) })
-  .catch(error => {
-    console.error("Error fetching posts:", error);
-  });
+function loadAllPosts(authService, postService) {
+  postService
+    .getAllPosts(authService)
+    .then((posts) => {
+      displayPostDetails(posts);
+    })
+    .catch((error) => {
+      console.error("Error fetching posts:", error);
+    });
 }
 
-function displayPostDetails(posts){
- 
+function displayPostDetails(posts) {
   const detailsContainer = document.getElementById("allPostsContainer");
 
-  // TODO: add bootstrap class later 
+  // TODO: add bootstrap class later
   detailsContainer.classList.add("postContainer");
-  detailsContainer.innerHTML = ""
-  
- posts.forEach((post) => {
+  detailsContainer.innerHTML = "";
+
+  posts.forEach((post) => {
     displayPost(post, detailsContainer);
   });
 }
 
-function displayPost (post, detailsContainer){
+function displayPost(post, detailsContainer) {
   // Create a div for each park
   const postContainer = document.createElement("div");
   postContainer.classList.add("postContainer");
@@ -49,30 +51,72 @@ function displayPost (post, detailsContainer){
 
   addUsername(post, detailsContainer);
   addDescription(post, detailsContainer);
-  addLikeButton(post,detailsContainer);
+  addLikeButton(post, detailsContainer);
 }
 
-function addUsername(posts, detailsContainer){
+function addUsername(posts, detailsContainer) {
   const username = document.createElement("h4");
   username.classList.add("userName");
   username.innerText = `Username: ${posts.username}`;
   detailsContainer.appendChild(username);
-} 
+}
 
-function addDescription(posts, detailsContainer){
+function addDescription(posts, detailsContainer) {
   const description = document.createElement("h5");
-  description.classList.add("description")
+  description.classList.add("description");
   description.innerText = `Description: ${posts.text}`;
-  detailsContainer.appendChild(description)
-} 
-function addLikeButton(posts,detailsContainer){
+  detailsContainer.appendChild(description);
+}
+function addLikeButton(posts, detailsContainer) {
   const likeButton = document.createElement("button");
-  likeButton.classList.add("like")
+  likeButton.setAttribute("id", posts._id);
+  likeButton.classList.add("like");
   likeButton.innerText = `Likes`;
-  detailsContainer.appendChild(likeButton)
+
+  likeButton.addEventListener("click", () => {
+    console.log("Button " + posts._id + " Clicked");
+    // console.log(authService, postService);
+    // handleLikeButtonClick(posts, authService, postService);
+    handleLikeButtonClick(posts);
+  });
+
+  detailsContainer.appendChild(likeButton);
 
   const displayLikes = document.createElement("span");
-  displayLikes.classList.add("like")
-  displayLikes.innerText = `${106}`;
-  detailsContainer.appendChild(displayLikes)
+  displayLikes.classList.add("like");
+  displayLikes.innerText = `${posts.likes.length}`;
+  detailsContainer.appendChild(displayLikes);
+}
+
+async function handleLikeButtonClick(posts) {
+  const authService = new AuthService();
+  const postService = new PostService();
+
+  const loginData = authService.getLoginData();
+  const authToken = loginData.token;
+
+  // Check if authToken is not undefined or null
+  if (!authToken) {
+    console.error("Authentication token is missing or invalid.");
+    return;
+  }
+
+  const postData = {
+    postId: posts._id,
+  };
+  console.log(postData, authToken);
+
+  try {
+    // Call the post method with the AuthService instance and postData
+    const result = await postService.addPostLike(postData, authToken);
+    console.log("await works");
+
+    window.location.reload();
+  } catch (error) {
+    // Display error message
+    postMessage.textContent = "Error like post. Please try again.";
+    postMessage.classList.add("error"); // Add error class for styling
+
+    console.error("Error:", error);
+  }
 }
