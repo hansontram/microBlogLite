@@ -4,7 +4,6 @@ let registerForm;
 document.addEventListener("DOMContentLoaded", () => {
   authService = new AuthService();
   registerForm = document.querySelector("#register");
-  console.log(registerForm);
   registerForm.addEventListener("submit", register);
 });
 function register(event) {

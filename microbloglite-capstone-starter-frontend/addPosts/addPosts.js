@@ -1,16 +1,3 @@
-// document.addEventListener("DOMContentLoaded", () => {
-//     authService = new AuthService();
-
-//     const logoutLink = document.querySelector("#logout-link");
-//     logoutLink.addEventListener("click", () => {
-//       authService.logout();
-//     });
-//     // moved here from posts.html to avoid console error
-//     if (authService.isLoggedIn() === false) {
-//       window.location.replace("/");
-//     }
-//   });
-
 "use strict";
 let postService;
 let postForm;
@@ -56,10 +43,21 @@ async function post(event) {
     // Call the post method with the AuthService instance and postData
     const result = await postService.post(authService, postData);
 
-    // Handle the result as needed
-    //   console.log("Post result:", result);
+    // Clear the form after successful post
+    postForm.reset();
+
+    // Display an alert before redirecting
+    const confirmRedirect = window.confirm("Post successful.");
+
+    if (confirmRedirect) {
+      // Redirect to the post page after user confirmation
+      window.location.replace("../posts/posts.html");
+    }
   } catch (error) {
-    // Handle errors
+    // Display error message
+    postMessage.textContent = "Error creating post. Please try again.";
+    postMessage.classList.add("error"); // Add error class for styling
+
     console.error("Error:", error);
   }
 }
