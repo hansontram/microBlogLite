@@ -13,7 +13,6 @@ function register(event) {
     fullName: registerForm.fullname.value.trim(),
     password: registerForm.password.value.trim(),
   };
-  console.log(formData.username);
-  registerForm.submit.disabled = true;
+
   authService.register(formData);
 }

@@ -8,7 +8,6 @@ let loginForm;
 document.addEventListener("DOMContentLoaded", () => {
   authService = new AuthService();
 
-// TODO: error in console says loginForm = null but login works
   loginForm = document.querySelector("#login");
   
   loginForm.addEventListener("submit", login);
@@ -27,9 +26,8 @@ function login(event) {
     username: loginForm.username.value,
     password: loginForm.password.value,
   };
-  console.log(loginData);
-  // Disables the button after the form has been submitted already:
-  loginForm.loginButton.disabled = true;
+  
+
 
   // Time to actually process the login using the function from auth.js!
   authService.login(loginData);
