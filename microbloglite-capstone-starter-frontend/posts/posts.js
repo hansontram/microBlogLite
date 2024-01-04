@@ -32,7 +32,7 @@ function loadAllPosts(authService, postService) {
 
 function displayPostDetails(posts) {
   const detailsDiv = document.getElementById("allPostsContainer");
-  detailsDiv.classList.add("container");
+  detailsDiv.classList.add("container", "m-5");
   detailsDiv.innerHTML = "";
 
   posts.forEach((post) => {
@@ -51,18 +51,19 @@ function displayGreeting(post) {
 function displayPost(post, detailsDiv) {
   const postContainer = document.createElement("div");
   postContainer.classList.add(
-    "p-5",
+    "p-4",
+    "m-1",
+    "mb-4",
     "border",
     "border-5",
-    "card",
-    "d-inline-flex"
+    "card"
   );
 
   postContainer.classList.add(
-    detailsDiv.children.length % 2 === 0 ? "border-dark" : "border-secondary"
+    detailsDiv.children.length % 2 === 0 ? "border-primary" : "border-secondary"
   );
   postContainer.classList.add(
-    detailsDiv.children.length % 2 === 0 ? "bg-primary" : "bg-secondary"
+    detailsDiv.children.length % 2 === 0 ? "bg-warning" : "bg-warning"
   );
 
   detailsDiv.appendChild(postContainer);
@@ -75,7 +76,7 @@ function displayPost(post, detailsDiv) {
 
 function addUsername(posts, postContainer) {
   const username = document.createElement("h4");
-  username.classList.add("card-title");
+  username.classList.add("card-title","text-light");
   username.innerText = `@${posts.username}`;
   postContainer.appendChild(username);
 }
@@ -84,7 +85,7 @@ function addDescription(posts, postContainer, detailsDiv) {
   const description = document.createElement("h5");
   description.classList.add("m-2", "card-text");
   description.classList.add(
-    detailsDiv.children.length % 2 === 0 ? "text-primary" : "text-dark"
+    detailsDiv.children.length % 2 === 0 ? "text-dark" : "text-dark"
   );
 
   description.innerText = `${posts.text}`;
@@ -103,15 +104,13 @@ function addLikeButton(posts, postContainer) {
 
   likeButton.addEventListener("click", () => {
     console.log("Button " + posts._id + " Clicked");
-    // console.log(authService, postService);
-    // handleLikeButtonClick(posts, authService, postService);
     handleLikeButtonClick(posts);
   });
 
   cardBody.appendChild(likeButton);
 
   const displayLikes = document.createElement("span");
-  displayLikes.classList.add("like");
+  displayLikes.classList.add("text-dark");
   displayLikes.innerText = `${posts.likes.length}`;
   cardBody.appendChild(displayLikes);
 }
@@ -140,7 +139,7 @@ function addDate(posts, postContainer) {
   }
 
   const footer = document.createElement("div");
-  footer.classList.add("card-footer");
+  footer.classList.add("card-footer","text-dark");
   footer.innerText = formattedDate;
   postContainer.appendChild(footer);
 }

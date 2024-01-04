@@ -39,16 +39,19 @@
     <script src="../services/auth-service.js"></script>
     <script src="../services/posts-service.js"></script>
     <script src="../index.js"></script>
-    <script>
-
-    </script>
+    <script></script>
   </head>
-  <body>
-
+  <body class="mx-auto">
     <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
       <!-- Logo on the left -->
       <div class="container-fluid px-5 py-3">
-        <a class="navbar-brand" href="./posts.html"> <img src="../images/logo-no-background.png" alt="logo" width="190" height="40"></a>
+        <a class="navbar-brand" href="./posts.html">
+          <img
+            src="../images/logo-no-background.png"
+            alt="logo"
+            width="190"
+            height="40"
+        /></a>
 
         <!-- Button to toggle navigation on smaller screens -->
         <button
@@ -91,53 +94,43 @@
       </div>
     </nav>
 
-    <main>
+    <main class="mx-auto">
       <div id="greetingContainer"></div>
-      <div id="allPostsContainer" class="postContainer">
-        <div class="container border border-primary border-5"></div>
-        <h4 class="userName">@coolsplat12</h4>
-        <h5 class="description">test1</h5>
-        <button id="08c47f26-b915-4891-8491-3c76c286151e" class="like">
-          ❤️</button
-        ><span class="like">1</span>
-        <div class="container border border-primary border-5"></div>
-        <h4 class="userName ">@coolsplat12</h4>
-        <h5 class="description">test2</h5>
-        <button id="9bf67be9-6402-447a-ad83-6c65c9023888" class="like">
-          ❤️</button
-        ><span class="like">0</span>
+      <div id="allPostsContainer" class="mx-auto">
       </div>
     </main>
 
-  
-
-    <footer class="bg-primary py-4 ">
+    <footer class="bg-primary py-4">
       <div class="container">
         <div class="row justify-content-center align-items-center text-center">
           <div class="col-md-12 mb-5">
-            <img src="../images/logo-no-background.png" alt="" width="250" height="50">
+            <img
+              src="../images/logo-no-background.png"
+              alt=""
+              width="250"
+              height="50"
+            />
           </div>
-          <div class=" text-white ">
-            <p class="mb-2">Created by Elvis, Hanson, & Juan </p>
+          <div class="text-white">
+            <p class="mb-2">Created by Elvis, Hanson, & Juan</p>
           </div>
-          <div class=" text-white ">
-            <p >
-              Check out the 
+          <div class="text-white">
+            <p>
+              Check out the
               <a
                 href="https://github.com/hansontram/microBlogLite"
                 target="_blank"
                 rel="noreferrer"
                 aria-label="link text - new window"
                 class="text-warning"
-              > Project Repo</a>
+              >
+                Project Repo</a
+              >
             </p>
           </div>
         </div>
       </div>
     </footer>
-    
-    
-    
 
     <!-- Page-specific code -->
     <script src="../posts/posts.js"></script>
