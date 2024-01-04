@@ -31,54 +31,74 @@ function loadAllPosts(authService, postService) {
 }
 
 function displayPostDetails(posts) {
-  const detailsContainer = document.getElementById("allPostsContainer");
-
-  detailsContainer.classList.add("postContainer");
-  detailsContainer.innerHTML = "";
+  const detailsDiv = document.getElementById("allPostsContainer");
+  detailsDiv.classList.add("container");
+  detailsDiv.innerHTML = "";
 
   posts.forEach((post) => {
-    displayPost(post, detailsContainer);
+    displayPost(post, detailsDiv);
   });
   displayGreeting(posts);
 }
 function displayGreeting(post) {
   const greetingContainer = document.getElementById("greetingContainer");
-  const greeting = document.createElement("h4");
-  greeting.classList.add("greeting");
+  const greeting = document.createElement("h2");
+  greeting.classList.add("m-5", "container");
   // Displays the last user who posted
   greeting.innerText = `Welcome back, ${post[0].username}!`;
   greetingContainer.appendChild(greeting);
 }
-function displayPost(post, detailsContainer) {
-  // Create a div for each post
+function displayPost(post, detailsDiv) {
   const postContainer = document.createElement("div");
-  postContainer.classList.add("postContainer");
-  postContainer.classList.add("border", "border-primary");
+  postContainer.classList.add(
+    "p-5",
+    "border",
+    "border-5",
+    "card",
+    "d-inline-flex"
+  );
 
-  detailsContainer.appendChild(postContainer);
+  postContainer.classList.add(
+    detailsDiv.children.length % 2 === 0 ? "border-dark" : "border-secondary"
+  );
+  postContainer.classList.add(
+    detailsDiv.children.length % 2 === 0 ? "bg-primary" : "bg-secondary"
+  );
 
-  addUsername(post, detailsContainer);
-  addDescription(post, detailsContainer);
-  addLikeButton(post, detailsContainer);
+  detailsDiv.appendChild(postContainer);
+
+  addUsername(post, postContainer);
+  addDescription(post, postContainer, detailsDiv);
+  addLikeButton(post, postContainer);
+  addDate(post, postContainer);
 }
 
-function addUsername(posts, detailsContainer) {
+function addUsername(posts, postContainer) {
   const username = document.createElement("h4");
-  username.classList.add("userName");
+  username.classList.add("card-title");
   username.innerText = `@${posts.username}`;
-  detailsContainer.appendChild(username);
+  postContainer.appendChild(username);
 }
 
-function addDescription(posts, detailsContainer) {
+function addDescription(posts, postContainer, detailsDiv) {
   const description = document.createElement("h5");
-  description.classList.add("description");
+  description.classList.add("m-2", "card-text");
+  description.classList.add(
+    detailsDiv.children.length % 2 === 0 ? "text-primary" : "text-dark"
+  );
+
   description.innerText = `${posts.text}`;
-  detailsContainer.appendChild(description);
+  postContainer.appendChild(description);
 }
-function addLikeButton(posts, detailsContainer) {
+
+function addLikeButton(posts, postContainer) {
+  const cardBody = document.createElement("div");
+  cardBody.classList.add("card-body");
+  postContainer.appendChild(cardBody);
+
   const likeButton = document.createElement("button");
   likeButton.setAttribute("id", posts._id);
-  likeButton.classList.add("like");
+  likeButton.classList.add("btn");
   likeButton.innerText = `❤️`;
 
   likeButton.addEventListener("click", () => {
@@ -88,13 +108,44 @@ function addLikeButton(posts, detailsContainer) {
     handleLikeButtonClick(posts);
   });
 
-  detailsContainer.appendChild(likeButton);
+  cardBody.appendChild(likeButton);
 
   const displayLikes = document.createElement("span");
   displayLikes.classList.add("like");
   displayLikes.innerText = `${posts.likes.length}`;
-  detailsContainer.appendChild(displayLikes);
+  cardBody.appendChild(displayLikes);
 }
+
+function addDate(posts, postContainer) {
+  const createdAtDate = new Date(posts.createdAt);
+  const now = new Date();
+  const timeDifference = now - createdAtDate;
+
+  // Calculate the time difference in seconds, minutes, hours, and days
+  const seconds = Math.floor(timeDifference / 1000);
+  const minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+
+  let formattedDate;
+
+  if (days > 0) {
+    formattedDate = `${days} day${days !== 1 ? 's' : ''} ago`;
+  } else if (hours > 0) {
+    formattedDate = `${hours} hour${hours !== 1 ? 's' : ''} ago`;
+  } else if (minutes > 0) {
+    formattedDate = `${minutes} minute${minutes !== 1 ? 's' : ''} ago`;
+  } else {
+    formattedDate = `${seconds} second${seconds !== 1 ? 's' : ''} ago`;
+  }
+
+  const footer = document.createElement("div");
+  footer.classList.add("card-footer");
+  footer.innerText = formattedDate;
+  postContainer.appendChild(footer);
+}
+
+
 
 async function handleLikeButtonClick(posts) {
   const authService = new AuthService();
