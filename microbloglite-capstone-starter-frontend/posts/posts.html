@@ -94,10 +94,24 @@
       </div>
     </nav>
 
-    <main class="mx-auto">
-      <div id="greetingContainer"></div>
-      <div id="allPostsContainer" class="mx-auto">
+    <main class="m-auto">
+      <div class="container">
+        <div class="d-flex justify-content-center text-center" id="greetingContainer"></div>
+        <div class="row justify-content-end container">
+          <div class="col-md-auto ">
+            <select class="form-select me-5" aria-label="Default select example">
+              <option selected>Sort By</option>
+              <option value="1">Popular</option>
+              <option value="2">Newest</option>
+              <option value="3">Oldest</option>
+              <option value="3">Funny</option>
+              <option value="3">Piggies</option>
+
+            </select>
+          </div>
+        </div>
       </div>
+      <div id="allPostsContainer" class="mx-auto"></div>
     </main>
 
     <footer class="bg-primary py-4">
