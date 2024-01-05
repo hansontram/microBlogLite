@@ -109,7 +109,12 @@ class AuthService {
         })
         .catch((error) => {
           console.error("Registration error:", error.message);
+          
         })
     );
   }
-}
+
+  }
+  
+  
+
