@@ -9,9 +9,7 @@ GitPost'n is a collaborative platform offering developers a space to share code,
 
 
 
-<!-- <div align="center">
-   <img src="https://user-images.githubusercontent.com/97640502/233798618-7c0675dd-01df-4c0e-b21e-8eb62f4f1afe.gif" alt="screen-record" />
-</div> -->
+
 
 # Overview
 
@@ -26,10 +24,9 @@ Team Forward allows users to:
 
 
 
-### Dependencies:
+### Technologies:
+This project was built with:
 
-<details>
-  <summary>Client</summary>
   <ul>
     <li>Javascript</li>
     <li>HTML</li>
@@ -37,16 +34,13 @@ Team Forward allows users to:
     <li>Bootstrap</li>
     <li>Bootswatch</li>
   </ul>
-</details>
 
-<details>
-  <summary>Server</summary>
   <ul>
     <li>MySQL</li>
     <li>Node.js</li>
-    <li>MicroBlogLite Api</li>
+    <li>MicroBlogLite API</li>
   </ul>
-</details>
+
 
 
 <!-- Contributing -->
