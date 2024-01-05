@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
   logoutLink.addEventListener("click", () => {
     authService.logout();
   });
-  // moved here from posts.html to avoid console error
   if (authService.isLoggedIn() === false) {
     window.location.replace("/");
   }
@@ -45,7 +44,11 @@ function displayGreeting(post) {
   const greeting = document.createElement("h2");
   greeting.classList.add("m-5", "container");
   // Displays the last user who posted
-  greeting.innerText = `Welcome back, ${post[0].username}!`;
+
+  const usernameData = localStorage.getItem("login-data");
+  const loginDataObj = JSON.parse(usernameData);
+  const username = loginDataObj.username;
+  greeting.innerText = `Welcome to the Gitpost'n party, ${username}!`;
   greetingContainer.appendChild(greeting);
 }
 function displayPost(post, detailsDiv) {
@@ -76,7 +79,7 @@ function displayPost(post, detailsDiv) {
 
 function addUsername(posts, postContainer) {
   const username = document.createElement("h4");
-  username.classList.add("card-title","text-light");
+  username.classList.add("card-title", "text-light");
   username.innerText = `@${posts.username}`;
   postContainer.appendChild(username);
 }
@@ -129,22 +132,20 @@ function addDate(posts, postContainer) {
   let formattedDate;
 
   if (days > 0) {
-    formattedDate = `${days} day${days !== 1 ? 's' : ''} ago`;
+    formattedDate = `${days} day${days !== 1 ? "s" : ""} ago`;
   } else if (hours > 0) {
-    formattedDate = `${hours} hour${hours !== 1 ? 's' : ''} ago`;
+    formattedDate = `${hours} hour${hours !== 1 ? "s" : ""} ago`;
   } else if (minutes > 0) {
-    formattedDate = `${minutes} minute${minutes !== 1 ? 's' : ''} ago`;
+    formattedDate = `${minutes} minute${minutes !== 1 ? "s" : ""} ago`;
   } else {
-    formattedDate = `${seconds} second${seconds !== 1 ? 's' : ''} ago`;
+    formattedDate = `${seconds} second${seconds !== 1 ? "s" : ""} ago`;
   }
 
   const footer = document.createElement("div");
-  footer.classList.add("card-footer","text-dark");
+  footer.classList.add("card-footer", "text-dark");
   footer.innerText = formattedDate;
   postContainer.appendChild(footer);
 }
-
-
 
 async function handleLikeButtonClick(posts) {
   const authService = new AuthService();
@@ -173,7 +174,7 @@ async function handleLikeButtonClick(posts) {
   } catch (error) {
     // Display error message
     postMessage.textContent = "Error like post. Please try again.";
-    postMessage.classList.add("error"); // Add error class for styling
+    postMessage.classList.add("error"); 
 
     console.error("Error:", error);
   }
