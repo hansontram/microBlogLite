@@ -5,7 +5,7 @@
    
 </div>
 
-GitPost'n is a collaborative platform offering developers a space to share code, collaborate on projects, and engage in discussions within the tech space. 
+GitPost'n is a collaborative platform offering developers a space to share code, collaborate on projects, and engage in discussions within the tech space. Built with the MicroBlogLite API in conjunction with Year Up's App Development track. 
 
 
 
